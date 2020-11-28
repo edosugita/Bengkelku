@@ -31,18 +31,22 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-$routes->get('/logout', 'Home::logout');
-$routes->get('/home/review/(:segment)', 'Home::review/$1');
-$routes->get('/home/detail/(:segment)', 'Home::detail/$1');
-$routes->get('/home/pemesanan(:segment)', 'Home::pemesanan/$1');
-$routes->match(['get', 'post'], '/profile', 'Home::profile', ['filter' => 'auth']);
-$routes->match(['get', 'post'], '/save', 'Home::save');
-$routes->match(['get', 'post'], '/pesan', 'Home::pesan');
-$routes->match(['get', 'post'], '/update', 'Home::update');
-$routes->match(['get', 'post'], '/ulasan', 'Home::ulasan');
-$routes->match(['get', 'post'], '/login', 'Home::login');
-$routes->match(['get', 'post'], '/register', 'Home::register');
+
+
+// ------------------------------------Users------------------------------------
+
+$routes->get('/', 'Users::index');
+$routes->get('/logout', 'Users::logout');
+$routes->get('/home/review/(:segment)', 'Users::review/$1');
+$routes->get('/home/detail/(:segment)', 'Users::detail/$1');
+$routes->get('/home/pemesanan/(:segment)', 'Users::pemesanan/$1');
+$routes->match(['get', 'post'], '/profile', 'Users::profile', ['filter' => 'auth']);
+$routes->match(['get', 'post'], '/save', 'Users::save');
+$routes->match(['get', 'post'], '/pesan', 'Users::pesan');
+$routes->match(['get', 'post'], '/update', 'Users::update');
+$routes->match(['get', 'post'], '/ulasan', 'Users::ulasan');
+$routes->match(['get', 'post'], '/login', 'Users::login');
+$routes->match(['get', 'post'], '/register', 'Users::register');
 
 /**
  * --------------------------------------------------------------------

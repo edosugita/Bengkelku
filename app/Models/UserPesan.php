@@ -21,10 +21,13 @@ class UserPesan extends Model
             ->get()->getResultArray();
     }
 
-    public function cekAntrian()
+    public function cekAntrian($slug)
     {
         return $this->db->table('pesan')
+            ->join('bengkel', 'pesan.id_bengkel = bengkel.id_bengkel')
+            ->join('users', 'pesan.id = users.id')
             ->selectMax('antrian')
+            ->where(['bengkel.slug' => $slug])
             ->get()->getResultArray();
     }
 }
