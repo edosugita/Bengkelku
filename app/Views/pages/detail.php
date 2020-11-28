@@ -8,33 +8,27 @@
                 <div class="col-md-4">
                     <div class="img-detail">
                         <div id="imgDisplay" style="width: 100%; height: 342.5px;">
-                            <img src="/assets/img/<?= $bengkel['gambar'] ?>" alt="image" class="thumbnail" id="detailImg">
-                        </div>
-                        <div id="modalImg" class="img">
-                            <span class="close">
-                                <i class="fas fa-times"></i>
-                            </span>
-                            <img class="modal-content" id="img01">
+                            <img src="<?= base_url() ?>/assets/img/<?= $bengkel['gambar'] ?>" alt="image" class="thumbnail">
                         </div>
                         <div class="img-bottom">
                             <div class="row">
                                 <div class="col-3">
-                                    <img src="/assets/img/test.jpg" onclick="changeImg(this)" alt="image" class="thumbnail">
+                                    <img src="<?= base_url() ?>/assets/img/test.jpg" onclick="changeImg(this)" alt="image" class="thumbnail">
                                 </div>
                                 <div class="col-3">
-                                    <img src="/assets/img/test2.jpg" onclick="changeImg(this)" alt="image" class="thumbnail">
+                                    <img src="<?= base_url() ?>/assets/img/test2.jpg" onclick="changeImg(this)" alt="image" class="thumbnail">
                                 </div>
-                                <div class="col-3">
-                                    <img src="/assets/img/test3.jpg" onclick="changeImg(this)" alt="image" class="thumbnail">
+                                <div class=" col-3">
+                                    <img src="<?= base_url() ?>/assets/img/test3.jpg" onclick="changeImg(this)" alt="image" class="thumbnail">
                                 </div>
-                                <div class="col-3">
-                                    <img src="/assets/img/test4.jpg" onclick="changeImg(this)" alt="image" class="thumbnail">
+                                <div class=" col-3">
+                                    <img src="<?= base_url() ?>/assets/img/test4.jpg" onclick="changeImg(this)" alt="image" class="thumbnail">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7">
+                <div class=" col-md-7">
                     <div class="col-md-12">
                         <h5><?= $bengkel['nama']; ?></h5>
                     </div>
@@ -72,166 +66,140 @@
                     <div class="buyer-reviews">
                         <div class="row">
                             <!-- Review 1 -->
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <img src="/assets/img/profile-user2.png" alt="profile" class="ulasan-profile">
-                                    </div>
-                                    <div class="col-9">
-                                        <div class="name-date my-auto">
-                                            <h6>Kelompok 9</h6>
-                                            <p>12 hari lalu</p>
+                            <?php if (empty($review)) : ?>
+                                <div class="col-md-12">
+                                    <p style="text-align: center; margin-top: 50px; margin-bottom: 50px"><strong>Tidak Ada Ulasan</strong></p>
+                                </div>
+                            <?php endif; ?>
+                            <?php foreach ($review as $r) : ?>
+                                <?php
+                                $tanggal1 = new DateTime($r['tgl']);
+                                $tanggal2 = new DateTime();
+
+                                $perbedaan = $tanggal2->diff($tanggal1)->format("%a") . ' Hari Yang Lalu';
+                                ?>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <?php if (empty($r['picture'])) : ?>
+                                                <img src="<?= base_url() ?>/assets/img/default.png" alt="profile" class="ulasan-profile">
+                                            <?php else : ?>
+                                                <img src="<?= base_url() ?>/assets/img/<?= $r['picture']; ?>" alt="profile" class="ulasan-profile">
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="name-date my-auto">
+                                                <h6><?= $r['nama_depan']; ?></h6>
+                                                <p><?= $perbedaan; ?></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star star-review"></span>
-                                    </div>
-                                    <div class="col-12">
-                                        <p>Pelayanan sangat profesional dan memuaskan. tak perlu pergi ke bengkel mekanik bisa datang ke rumah.</p>
-                                    </div>
-                                </div>
-                                <div class="line"></div>
-                            </div>
-                            <!-- Review 2 -->
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <img src="/assets/img/profile-user2.png" alt="profile" class="ulasan-profile">
-                                    </div>
-                                    <div class="col-9">
-                                        <div class="name-date my-auto">
-                                            <h6>Kelompok 9</h6>
-                                            <p>12 hari lalu</p>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <span class="fa fa-star checked star-review"></span>
+                                            <span class="fa fa-star checked star-review"></span>
+                                            <span class="fa fa-star checked star-review"></span>
+                                            <span class="fa fa-star checked star-review"></span>
+                                            <span class="fa fa-star star-review"></span>
+                                        </div>
+                                        <div class="col-12">
+                                            <p><?= $r['komentar']; ?></p>
                                         </div>
                                     </div>
+                                    <div class="line"></div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star star-review"></span>
-                                    </div>
-                                    <div class="col-12">
-                                        <p>Pelayanan sangat profesional dan memuaskan. tak perlu pergi ke bengkel mekanik bisa datang ke rumah.</p>
-                                    </div>
-                                </div>
-                                <div class="line"></div>
-                            </div>
-                            <!-- Review 3 -->
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <img src="/assets/img/profile-user2.png" alt="profile" class="ulasan-profile">
-                                    </div>
-                                    <div class="col-9">
-                                        <div class="name-date my-auto">
-                                            <h6>Kelompok 9</h6>
-                                            <p>12 hari lalu</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star star-review"></span>
-                                    </div>
-                                    <div class="col-12">
-                                        <p>Pelayanan sangat profesional dan memuaskan. tak perlu pergi ke bengkel mekanik bisa datang ke rumah.</p>
-                                    </div>
-                                </div>
-                                <div class="line"></div>
-                            </div>
-                            <!-- Review 4 -->
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <img src="/assets/img/profile-user2.png" alt="profile" class="ulasan-profile">
-                                    </div>
-                                    <div class="col-9">
-                                        <div class="name-date my-auto">
-                                            <h6>Kelompok 9</h6>
-                                            <p>12 hari lalu</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star star-review"></span>
-                                    </div>
-                                    <div class="col-12">
-                                        <p>Pelayanan sangat profesional dan memuaskan. tak perlu pergi ke bengkel mekanik bisa datang ke rumah.</p>
-                                    </div>
-                                </div>
-                                <div class="line"></div>
-                            </div>
-                            <!-- Review 5 -->
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <img src="/assets/img/profile-user2.png" alt="profile" class="ulasan-profile">
-                                    </div>
-                                    <div class="col-9">
-                                        <div class="name-date my-auto">
-                                            <h6>Kelompok 9</h6>
-                                            <p>12 hari lalu</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star checked star-review"></span>
-                                        <span class="fa fa-star star-review"></span>
-                                    </div>
-                                    <div class="col-12">
-                                        <p>Pelayanan sangat profesional dan memuaskan. tak perlu pergi ke bengkel mekanik bisa datang ke rumah.</p>
-                                    </div>
-                                </div>
-                                <div class="line"></div>
-                            </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
+                    <section class="message">
+                        <button type="button" class="btn pesan">
+                            <i class="fas fa-comment-dots"></i>
+                        </button>
+                    </section>
+                    <section class="navbar-bottom fixed-bottom">
+                        <ul class="nav float-right">
+                            <?php if (session()->get('isLoggedIn')) : ?>
+                                <li class="order"><a data-toggle="modal" data-target="#exampleModal">Pesan</a></li>
+                            <?php endif; ?>
+                            <li class="check-queue"><a data-toggle="modal" data-target="#antrian">Cek Antrian</a></li>
+                        </ul>
+                        <?php foreach ($pesan as $p) : ?>
+                            <?php if (empty($p['antrian'])) : ?>
+                                <ul class="nav"></ul>
+                            <?php else : ?>
+                                <ul class="nav">
+                                    <?php if (session()->get('id') == $p['id']) : ?>
+                                        <li class="check-queue"><a href="<?= base_url() ?>/home/review/<?= $bengkel['slug']; ?>">Review</a></li>
+                                        <li class="order">
+                                            <a href="<?= base_url() ?>/home/pemesanan/<?= $bengkel['slug'] ?>">No Antrian : <strong><?= $p['antrian']; ?></strong></a>
+                                        </li>
+                                    <?php endif; ?>
+                                </ul>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </section>
                 </div>
-                <section class="message">
-                    <button type="button" class="btn pesan">
-                        <i class="fas fa-comment-dots"></i>
-                    </button>
-                </section>
-                <section class="navbar-bottom fixed-bottom">
-                    <ul class="nav float-right">
-                        <li class="order"><a href="">Pesan</a></li>
-                        <li class="check-queue"><a href="">Cek Antrian</a></li>
-                    </ul>
-                </section>
+            </div>
+        </div>
+</main>
+
+<!-- Pesan -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/pesan" method="post">
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <p style="text-align: center; font-size: 17px">Yakin Ingin Memesan</p>
+                    </div>
+                    <input type="hidden" name="idbengkel" value="<?= $bengkel['id_bengkel']; ?>">
+                    <input type="hidden" name="iduser" value="<?= session()->get('id') ?>">
+                    <?php foreach ($cek as $c) : ?>
+                        <input type="hidden" name="antrian" value="<?= $c['antrian']; ?>">
+                    <?php endforeach; ?>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Pesan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Antrian -->
+<div class="modal fade" id="antrian" tabindex="-2" aria-labelledby="antrian" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="antrianLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <?php foreach ($cek as $c) : ?>
+                        <?php if (empty($c['antrian'])) : ?>
+                            <p style="text-align: center; font-size: 17px">Tidak Terdapat Antrian</p>
+                        <?php else : ?>
+                            <p style="text-align: center; font-size: 17px">Terdapat <?= $c['antrian']; ?> antrian saat ini</p>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-</main>
+</div>
 <?= $this->endSection(); ?>

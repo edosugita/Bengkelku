@@ -4,18 +4,24 @@ namespace App\Controllers;
 
 use App\Models\BengkelModel;
 use App\Models\UserModel;
+use App\Models\UserReview;
 use App\Models\UserUpload;
+use App\Models\UserPesan;
 use Config\App;
 
 class Home extends BaseController
 {
 	protected $model;
 	protected $bengkelModel;
+	protected $reviewBengkel;
+	protected $userPesan;
 
 	public function __construct()
 	{
 		$this->model = new UserUpload();
 		$this->bengkelModel = new BengkelModel();
+		$this->reviewBengkel = new UserReview();
+		$this->userPesan = new UserPesan();
 	}
 
 	public function index()
@@ -137,6 +143,7 @@ class Home extends BaseController
 	{
 		$data = [
 			'title' => 'Profile',
+
 		];
 
 		return view('pages/profile', $data);
@@ -207,13 +214,77 @@ class Home extends BaseController
 
 	public function detail($slug)
 	{
-
 		$data = [
 			'title' => 'Detail',
-			'bengkel' => $this->bengkelModel->getBengkel($slug)
+			'bengkel' => $this->bengkelModel->getBengkel($slug),
+			'review' => $this->reviewBengkel->get_Review($slug),
+			'pesan' => $this->userPesan->getAntrian($slug),
+			'cek' => $this->userPesan->cekAntrian(),
 		];
 
 		return view('pages/detail', $data);
+	}
+
+	public function review($slug)
+	{
+		$data = [
+			'title' => 'Review',
+			'bengkel' => $this->bengkelModel->getBengkel($slug),
+		];
+
+		return view('pages/review', $data);
+	}
+
+	public function ulasan()
+	{
+		helper(['form']);
+		$newData = [
+			'id_bengkel' => $this->request->getVar('idbengkel'),
+			'id' => $this->request->getVar('iduser'),
+			'komentar' => $this->request->getVar('ulasan'),
+		];
+
+		//dd($newData);
+		$this->reviewBengkel->save($newData);
+		$session = session();
+		$session->setFlashdata('success', 'Ulasan Telah Ditambahkan');
+		return redirect()->to('/');
+	}
+
+	public function pesan()
+	{
+		helper(['form']);
+
+		$antrian = $this->request->getVar('antrian');
+
+		if ($antrian == null) {
+			$isi = 1;
+		} else {
+			$isi = $antrian + 1;
+		}
+
+		$newData = [
+			'id_bengkel' => $this->request->getVar('idbengkel'),
+			'id' => $this->request->getVar('iduser'),
+			'antrian' => $isi,
+		];
+
+		$this->userPesan->save($newData);
+		$session = session();
+		$session->setFlashdata('success', 'Berhasil Memesan');
+		return redirect()->to('/');
+	}
+
+	public function pemesanan($slug)
+	{
+		$data = [
+			'title' => 'Pemesanan',
+			'bengkel' => $this->bengkelModel->getBengkel($slug),
+			'pesan' => $this->userPesan->getAntrian($slug),
+			'cek' => $this->userPesan->cekAntrian($slug),
+		];
+
+		return view('pages/pesanan', $data);
 	}
 
 	public function logout()

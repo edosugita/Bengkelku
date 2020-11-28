@@ -6,14 +6,14 @@
         <div class="col-md-12">
             <ul class="nav">
                 <li class="nav-item">
-                    <a href="/" class="nav-link">HOME</a>
+                    <a href="<?= base_url() ?>/" class="nav-link">HOME</a>
                 </li>
             </ul>
         </div>
     </div>
     <div class="row">
         <div class="col-md-7">
-            <img src="/assets/img/bg.jpg" class="img-fluid" alt="gambar" aria-disabled="true">
+            <img src="<?= base_url() ?>/assets/img/bg.jpg" class="img-fluid" alt="gambar" aria-disabled="true">
         </div>
         <div class="col-md-5 modal-content">
             <h3>sign up</h3>

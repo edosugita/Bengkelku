@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">BENGKELKU.ID</a>
+        <a class="navbar-brand" href="<?= base_url() ?>/">BENGKELKU.ID</a>
         <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -31,19 +31,19 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <?php if (empty(session()->get('picture'))) : ?>
-                            <img style="border-radius: 200px !important; width: 50px; height: 50px" src="/assets/img/profile-user.png">
+                            <img style="border-radius: 200px !important; width: 50px; height: 50px" src="<?= base_url() ?>/assets/img/default.png">
                         <?php else : ?>
-                            <img style="border-radius: 200px !important; width: 50px; height: 50px" src="/assets/img/<?= session()->get('picture') ?>">
+                            <img style="border-radius: 200px !important; width: 50px; height: 50px" src="<?= base_url() ?>/assets/img/<?= session()->get('picture') ?>">
                         <?php endif; ?>
                     </li>
                 </ul>
             <?php else : ?>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Sign In</a>
+                        <a class="nav-link" href="<?= base_url() ?>/login">Sign In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register">Sign Up</a>
+                        <a class="nav-link" href="<?= base_url() ?>/register">Sign Up</a>
                     </li>
                 </ul>
             <?php endif; ?>

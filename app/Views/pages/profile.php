@@ -22,7 +22,7 @@
                 <div class="picture">
                     <?php if (session()->get('isLoggedIn')) : ?>
                         <?php if (empty(session()->get('picture'))) : ?>
-                            <img alt="profile" class="img-thumbnail" src="/assets/img/profile-user2.png">
+                            <img alt="profile" class="img-thumbnail" src="/assets/img/default.png">
                         <?php else : ?>
                             <img alt="profile" class="img-thumbnail" src="/assets/img/<?= session()->get('picture') ?>">
                         <?php endif; ?>

@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div class="col-md-7">
-            <img src="/assets/img/bg.jpg" class="img-fluid" alt="gambar">
+            <img src="<?= base_url() ?>/assets/img/bg.jpg" class="img-fluid" alt="gambar">
         </div>
         <div class="col-md-4 modal-content">
             <h3>welcome</h3>
