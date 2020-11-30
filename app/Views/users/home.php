@@ -87,12 +87,17 @@
                                     <div class="card-body">
                                         <h6 class="card-label"><?= $b['nama']; ?></h6>
                                         <p class="card-text">Kota <?= $b['kota']; ?></p>
-
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
+                                        <!-- <div class="row">
+                                            <div class="col-2">
+                                                <span class="fa fa-star checked"></span>
+                                            </div>
+                                            <div class="col-8" style="margin-top: 3px;">
+                                                <?php //foreach ($rating as $r) : 
+                                                ?>
+                                                    <p><strong><?php// number_format($r['rating'], 2) ?></strong></p>
+                                                <?php// endforeach; ?>
+                                            </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </a>

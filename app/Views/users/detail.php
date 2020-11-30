@@ -33,11 +33,20 @@
                         <h5><?= $bengkel['nama']; ?></h5>
                     </div>
                     <div class="col-md-12">
-                        <span class="fa fa-star checked star-seller"></span>
-                        <span class="fa fa-star checked star-seller"></span>
-                        <span class="fa fa-star checked star-seller"></span>
-                        <span class="fa fa-star checked star-seller"></span>
-                        <span class="fa fa-star star-seller"></span>
+                        <div class="row">
+                            <?php foreach ($rating as $r) : ?>
+                                <div class="col-1">
+                                    <?php if ($r['rating'] == 0) : ?>
+                                        <span class="fa fa-star star-seller fa-2x" style="color: #d4d4d4;"></span>
+                                    <?php else : ?>
+                                        <span class="fa fa-star checked star-seller fa-2x"></span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="col-11" style="margin-top: 3px;">
+                                    <h4><strong><?= number_format($r['rating'], 1); ?></strong></h4>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <h5>Buka</h5>
@@ -98,11 +107,9 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-12">
-                                            <span class="fa fa-star checked star-review"></span>
-                                            <span class="fa fa-star checked star-review"></span>
-                                            <span class="fa fa-star checked star-review"></span>
-                                            <span class="fa fa-star checked star-review"></span>
-                                            <span class="fa fa-star star-review"></span>
+                                            <?php for ($i = 0; $i < $r['rating']; $i++) : ?>
+                                                <span class="fa fa-star checked star-review"></span>
+                                            <?php endfor; ?>
                                         </div>
                                         <div class="col-12">
                                             <p><?= $r['komentar']; ?></p>

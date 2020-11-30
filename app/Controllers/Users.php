@@ -33,11 +33,11 @@ class Users extends BaseController
         } else {
             $bengkel = $this->bengkelModel;
         }
-
         $data = [
             'title' => 'bengkelku.id',
             'bengkel' => $bengkel->paginate(50, 'bengkel'),
             'pager' => $this->bengkelModel->pager,
+            //'rating' => $this->reviewBengkel->getRating(),
 
         ];
 
@@ -214,12 +214,14 @@ class Users extends BaseController
 
     public function detail($slug)
     {
+        $rating = $this->reviewBengkel->getRating($slug);
         $data = [
             'title' => 'Detail',
             'bengkel' => $this->bengkelModel->getBengkel($slug),
             'review' => $this->reviewBengkel->get_Review($slug),
             'pesan' => $this->userPesan->getAntrian($slug),
             'cek' => $this->userPesan->cekAntrian($slug),
+            'rating' => $rating,
         ];
 
         return view('users/detail', $data);
@@ -241,10 +243,11 @@ class Users extends BaseController
         $newData = [
             'id_bengkel' => $this->request->getVar('idbengkel'),
             'id' => $this->request->getVar('iduser'),
+            'rating' => $this->request->getVar('rating'),
             'komentar' => $this->request->getVar('ulasan'),
         ];
 
-        //dd($newData);
+        // dd($newData);
         $this->reviewBengkel->save($newData);
         $session = session();
         $session->setFlashdata('success', 'Ulasan Telah Ditambahkan');

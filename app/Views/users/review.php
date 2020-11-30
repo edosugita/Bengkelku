@@ -1,4 +1,4 @@
-<?= $this->extend('layout/detail'); ?>
+<?= $this->extend('layout/review'); ?>
 
 <?= $this->section('content'); ?>
 
@@ -11,6 +11,15 @@
                 </div>
             </div>
         <?php endif; ?>
+        <div class="my-auto" align="center">
+            <ul class="nav" style="margin-top: 20px; margin-bottom: 20px;">
+                <li class="star"><i class="fa fa-star fa-2x" data-index="0"></i></li>
+                <li class="star"><i class="fa fa-star fa-2x" data-index="1"></i></li>
+                <li class="star"><i class="fa fa-star fa-2x" data-index="2"></i></li>
+                <li class="star"><i class="fa fa-star fa-2x" data-index="3"></i></li>
+                <li class="star"><i class="fa fa-star fa-2x" data-index="4"></i></li>
+            </ul>
+        </div>
         <form action="/ulasan" method="post">
             <div class="form-group">
                 <input class="form-control" type="text" value="<?= $bengkel['nama']; ?>" disabled>
@@ -18,6 +27,7 @@
             </div>
             <div class="form-group">
                 <input class="form-control" type="hidden" name="iduser" value="<?= session()->get('id') ?>">
+                <textarea style="visibility: hidden; position: absolute;" name="rating" id="rating" cols="30" rows="10"></textarea>
             </div>
             <div class="form-group">
                 <textarea class="form-control" name="ulasan" rows="3" placeholder="Ulasan Anda"></textarea>
