@@ -138,10 +138,16 @@
                             <?php else : ?>
                                 <ul class="nav">
                                     <?php if (session()->get('id') == $p['id']) : ?>
-                                        <li class="check-queue"><a href="<?= base_url() ?>/home/review/<?= $bengkel['slug']; ?>">Review</a></li>
-                                        <li class="order">
-                                            <a href="<?= base_url() ?>/home/pemesanan/<?= $bengkel['slug'] ?>">No Antrian : <strong><?= $p['antrian']; ?></strong></a>
-                                        </li>
+                                        <?php if ($p['status'] == 'completed') : ?>
+                                            <li class="check-queue"><a href="<?= base_url() ?>/home/review/<?= $bengkel['slug']; ?>">Review</a></li>
+                                        <?php elseif ($p['status'] == 'in progress') : ?>
+                                            <li class="check-queue"><a href="<?= base_url() ?>/home/review/<?= $bengkel['slug']; ?>">Review</a></li>
+                                            <li class="order">
+                                                <a href="<?= base_url() ?>/home/pemesanan/<?= $bengkel['slug'] ?>">No Antrian : <strong><?= $p['antrian']; ?></strong></a>
+                                            </li>
+                                        <?php else : ?>
+                                            <ul class="nav"></ul>
+                                        <?php endif; ?>
                                     <?php endif; ?>
                                 </ul>
                             <?php endif; ?>
@@ -168,6 +174,7 @@
                         <p style="text-align: center; font-size: 17px">Yakin Ingin Memesan</p>
                     </div>
                     <input type="hidden" name="idbengkel" value="<?= $bengkel['id_bengkel']; ?>">
+                    <input type="hidden" name="status" value="in progress">
                     <input type="hidden" name="iduser" value="<?= session()->get('id') ?>">
                     <?php foreach ($cek as $c) : ?>
                         <input type="hidden" name="antrian" value="<?= $c['antrian']; ?>">

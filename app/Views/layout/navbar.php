@@ -17,7 +17,7 @@
                     </a>
                 </li>
             </ul>
-            <form method="post" class="mr-2 my-auto form-width d-inline-block">
+            <form method="get" class="mr-2 my-auto form-width d-inline-block">
                 <div class="input-group">
                     <input type="text" class="form-control border border-right-0" placeholder="Search" name="keyword">
                     <span class="input-group-append">

@@ -269,6 +269,7 @@ class Users extends BaseController
         $newData = [
             'id_bengkel' => $this->request->getVar('idbengkel'),
             'id' => $this->request->getVar('iduser'),
+            'status' => $this->request->getVar('status'),
             'antrian' => $isi,
         ];
 
@@ -288,6 +289,38 @@ class Users extends BaseController
         ];
 
         return view('users/pesanan', $data);
+    }
+
+    public function selesai($id)
+    {
+        helper(['form']);
+        $complated = 'complated';
+        $newData = [
+            'id_pesan' => $id,
+            'status' => $complated,
+        ];
+
+        dd($newData);
+        $this->userPesan->updateStatus($newData, $id);
+        $session = session();
+        $session->setFlashdata('success', 'Sevice Telah Selesai');
+        return redirect()->to('/');
+    }
+
+    public function canceled($id)
+    {
+        helper(['form']);
+        $cancel = 'canceled';
+        $newData = [
+            'id_pesan' => $id,
+            'status' => $cancel,
+        ];
+
+        // dd($newData, $id);
+        $this->userPesan->updateStatus($newData, $id);
+        $session = session();
+        $session->setFlashdata('success', 'Sevice Telah Dibatalkan');
+        return redirect()->to('/');
     }
 
     public function logout()

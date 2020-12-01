@@ -39,6 +39,8 @@ $routes->get('/', 'Users::index');
 $routes->get('/logout', 'Users::logout');
 $routes->get('/home/review/(:segment)', 'Users::review/$1');
 $routes->get('/home/detail/(:segment)', 'Users::detail/$1');
+$routes->get('/selesai/(:segment)', 'Users::selesai/$1');
+$routes->get('/canceled/(:segment)', 'Users::canceled/$1');
 $routes->get('/home/pemesanan/(:segment)', 'Users::pemesanan/$1');
 $routes->match(['get', 'post'], '/profile', 'Users::profile', ['filter' => 'auth']);
 $routes->match(['get', 'post'], '/save', 'Users::save');

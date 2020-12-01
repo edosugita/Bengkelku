@@ -10,7 +10,7 @@ class UserPesan extends Model
     protected $primaryKey = 'id_pesan';
     protected $createdField = 'tgl';
     protected $useTimestamps = true;
-    protected $allowedFields = ['id_bengkel', 'id', 'antrian'];
+    protected $allowedFields = ['id_bengkel', 'id', 'antrian', 'status'];
 
     public function getAntrian($slug)
     {
@@ -29,5 +29,10 @@ class UserPesan extends Model
             ->selectMax('antrian')
             ->where(['bengkel.slug' => $slug])
             ->get()->getResultArray();
+    }
+
+    public function updateStatus($newData, $id)
+    {
+        return $this->db->table($this->table)->update($newData, ['id_pesan' => $id]);
     }
 }
