@@ -50,6 +50,21 @@ $routes->match(['get', 'post'], '/ulasan', 'Users::ulasan');
 $routes->match(['get', 'post'], '/login', 'Users::login');
 $routes->match(['get', 'post'], '/register', 'Users::register');
 
+// ------------------------------------Admin------------------------------------
+
+$routes->get('/admin', 'Admin::index', ['filter' => 'authadmin']);
+$routes->get('/admin/logout', 'Admin::adminlogout', ['filter' => 'authadmin']);
+$routes->get('/admin/bengkel', 'Admin::bengkel', ['filter' => 'authadmin']);
+$routes->get('/admin/bengkel/edit/(:segment)', 'Admin::edit/$1', ['filter' => 'authadmin']);
+$routes->delete('/admin/bengkel/delete/(:num)', 'Admin::delete/$1', ['filter' => 'authadmin']);
+$routes->get('/admin/bengkel/(:any)', 'Admin::detail/$1', ['filter' => 'authadmin']);
+$routes->get('/admin/customer', 'Admin::users', ['filter' => 'authadmin']);
+$routes->get('/admin/customer/edit/(:segment)', 'Admin::edituser/$1', ['filter' => 'authadmin']);
+$routes->get('/admin/customer/(:any)', 'Admin::customer/$1', ['filter' => 'authadmin']);
+$routes->delete('/admin/customer/delete/(:num)', 'Admin::deleteuser/$1', ['filter' => 'authadmin']);
+$routes->match(['get', 'post'], '/admin/login', 'Admin::login');
+$routes->get('/admin/visitor', 'Admin::visitor', ['filter' => 'authadmin']);
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

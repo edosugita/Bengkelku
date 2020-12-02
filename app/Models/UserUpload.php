@@ -9,11 +9,14 @@ class UserUpload extends Model
     protected $table = 'users';
     protected $useTimestamps = true;
     protected $allowedFields = ['nama_depan', 'nama_belakang', 'number', 'alamat', 'email', 'picture'];
-    protected $beforeUpdate = ['beforeUpdate'];
 
-
-    protected function beforeUpdate(array $data)
+    public function getUsers()
     {
-        return $data;
+        return $this->db->table('users')->get()->getResultArray();
+    }
+
+    public function getUser($id = false)
+    {
+        return $this->where(['id' => $id])->first();
     }
 }
