@@ -7,14 +7,7 @@
         <div id="my-nav" class="collapse navbar-collapse">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-envelope-open-text"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-bell"></i>
-                    </a>
+                    <a class="nav-link" href="<?= base_url() ?>/bengkel/login">Bergabung</a>
                 </li>
             </ul>
             <form method="get" class="mr-2 my-auto form-width d-inline-block">

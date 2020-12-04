@@ -3,6 +3,7 @@
 namespace App\Validation;
 
 use App\Models\AdminModel;
+use App\Models\BengkelUserModel;
 use App\Models\UserModel;
 
 class UserRules
@@ -29,5 +30,16 @@ class UserRules
         }
 
         return password_verify($data['password'], $admin['password']);
+    }
+    public function validateBengkel(string $str, string $field, array $data)
+    {
+        $m = new BengkelUserModel();
+        $bengkel = $m->where('email', $data['email'])->first();
+
+        if (!$bengkel) {
+            return false;
+        }
+
+        return password_verify($data['password'], $bengkel['password']);
     }
 }

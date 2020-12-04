@@ -31,13 +31,10 @@
                         <a href="">Tentang Bengkelku.id</a>
                     </div>
                     <div class="col-12">
-                        <a href="">Tentang Bengkelku.id</a>
+                        <a href="">Karir</a>
                     </div>
                     <div class="col-12">
-                        <a href="">Tentang Bengkelku.id</a>
-                    </div>
-                    <div class="col-12">
-                        <a href="">Tentang Bengkelku.id</a>
+                        <a href="">Blog</a>
                     </div>
                 </div>
                 <div class="col-4">

@@ -6,17 +6,18 @@ use CodeIgniter\Model;
 
 class UserReview extends Model
 {
-    protected $table = 'review';
-    protected $primaryKey = 'id_review';
-    protected $createdField = 'tgl';
-    protected $useTimestamps = true;
-    protected $allowedFields = ['id_bengkel', 'id', 'komentar', 'rating'];
+    protected $table            = 'review';
+    protected $primaryKey       = 'id_review';
+    protected $createdField     = 'tgl';
+    protected $useTimestamps    = true;
+    protected $allowedFields    = ['id_pesan', 'komentar', 'rating'];
 
     public function get_Review($slug)
     {
         return $this->db->table('review')
-            ->join('bengkel', 'review.id_bengkel = bengkel.id_bengkel')
-            ->join('users', 'review.id = users.id')
+            ->join('pesan', 'review.id_pesan = pesan.id_pesan')
+            ->join('bengkel', 'bengkel.id_bengkel = pesan.id_bengkel')
+            ->join('users', 'users.id = pesan.id')
             ->where(['bengkel.slug' => $slug])
             ->get()->getResultArray();
     }
@@ -24,8 +25,9 @@ class UserReview extends Model
     public function getRating($slug = false)
     {
         return $this->db->table('review')
-            ->join('bengkel', 'review.id_bengkel = bengkel.id_bengkel')
-            ->join('users', 'review.id = users.id')
+            ->join('pesan', 'review.id_pesan = pesan.id_pesan')
+            ->join('bengkel', 'bengkel.id_bengkel = pesan.id_bengkel')
+            ->join('users', 'users.id = pesan.id')
             ->selectAvg('rating')
             ->where(['bengkel.slug' => $slug])
             ->get()->getResultArray();

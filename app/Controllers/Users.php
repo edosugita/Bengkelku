@@ -37,8 +37,7 @@ class Users extends BaseController
             'title' => 'bengkelku.id',
             'bengkel' => $bengkel->paginate(50, 'bengkel'),
             'pager' => $this->bengkelModel->pager,
-            //'rating' => $this->reviewBengkel->getRating(),
-
+            'rating' => $this->reviewBengkel->getRating(),
         ];
 
         return view('users/home', $data);
@@ -232,6 +231,7 @@ class Users extends BaseController
         $data = [
             'title' => 'Review',
             'bengkel' => $this->bengkelModel->getBengkel($slug),
+            'pesan' => $this->userPesan->getAntrian($slug),
         ];
 
         return view('users/review', $data);
@@ -241,13 +241,12 @@ class Users extends BaseController
     {
         helper(['form']);
         $newData = [
-            'id_bengkel' => $this->request->getVar('idbengkel'),
-            'id' => $this->request->getVar('iduser'),
+            'id_pesan' => $this->request->getVar('idpesan'),
             'rating' => $this->request->getVar('rating'),
             'komentar' => $this->request->getVar('ulasan'),
         ];
 
-        // dd($newData);
+        //dd($newData);
         $this->reviewBengkel->save($newData);
         $session = session();
         $session->setFlashdata('success', 'Ulasan Telah Ditambahkan');
@@ -294,13 +293,17 @@ class Users extends BaseController
     public function selesai($id)
     {
         helper(['form']);
-        $complated = 'complated';
+        $complated = 'completed';
+        if ($complated) {
+            $a = 0;
+        }
         $newData = [
             'id_pesan' => $id,
             'status' => $complated,
+            'antrian' => $a,
         ];
 
-        dd($newData);
+        //dd($newData);
         $this->userPesan->updateStatus($newData, $id);
         $session = session();
         $session->setFlashdata('success', 'Sevice Telah Selesai');

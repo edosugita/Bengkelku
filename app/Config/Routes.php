@@ -65,6 +65,17 @@ $routes->delete('/admin/customer/delete/(:num)', 'Admin::deleteuser/$1', ['filte
 $routes->match(['get', 'post'], '/admin/login', 'Admin::login');
 $routes->get('/admin/visitor', 'Admin::visitor', ['filter' => 'authadmin']);
 
+// ------------------------------------Bengkel------------------------------------
+
+$routes->get('/bengkel', 'Pages::profil', ['filter' => 'authbengkel']);
+$routes->get('/Pages/(:segment)', 'Pages::detail/$1', ['filter' => 'authbengkel']);
+$routes->get('/Pages/detailonline/(:segment)', 'Pages::detailonline/$1', ['filter' => 'authbengkel']);
+$routes->get('/bengkel/logout', 'Pages::bengkellogout', ['filter' => 'authbengkel']);
+$routes->match(['get', 'post'], '/bengkel/login', 'Pages::login');
+$routes->match(['get', 'post'], '/bengkel/register', 'Pages::register');
+$routes->match(['get', 'post'], '/bengkel/update', 'Pages::update');
+$routes->match(['get', 'post'], '/bengkel/save', 'Pages::save');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

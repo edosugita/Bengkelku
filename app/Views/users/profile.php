@@ -51,18 +51,6 @@
                             <td>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Tanggal Lahir</td>
-                            <td>-</td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Jenis Kelamin</td>
-                            <td>-</td>
-                            <td>
-                            </td>
-                        </tr>
                     </tbody>
                     <thead>
                         <tr>

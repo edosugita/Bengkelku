@@ -88,15 +88,18 @@
                                         <h6 class="card-label"><?= $b['nama']; ?></h6>
                                         <p class="card-text">Kota <?= $b['kota']; ?></p>
                                         <!-- <div class="row">
-                                            <div class="col-2">
-                                                <span class="fa fa-star checked"></span>
-                                            </div>
-                                            <div class="col-8" style="margin-top: 3px;">
-                                                <?php //foreach ($rating as $r) : 
-                                                ?>
-                                                    <p><strong><?php// number_format($r['rating'], 2) ?></strong></p>
-                                                <?php// endforeach; ?>
-                                            </div>
+                                            </?php foreach ($rating as $r) : ?>
+                                                <div class="col-2">
+                                                    </?php if ($r['rating'] == 0) : ?>
+                                                        <span class="fa fa-star star-seller" style="color: #d4d4d4;"></span>
+                                                    </?php else : ?>
+                                                        <span class="fa fa-star checked star-seller"></span>
+                                                    </?php endif; ?>
+                                                </div>
+                                                <div class="col-8" style="margin-top: 3px;">
+                                                    <p><strong></?= number_format($r['rating'], 1); ?></strong></p>
+                                                </div>
+                                            </?php endforeach; ?>
                                         </div> -->
                                     </div>
                                 </div>

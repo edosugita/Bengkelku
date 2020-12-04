@@ -13,16 +13,22 @@
                         <div class="img-bottom">
                             <div class="row">
                                 <div class="col-3">
-                                    <img src="<?= base_url() ?>/assets/img/test.jpg" onclick="changeImg(this)" alt="image" class="thumbnail">
+                                    <img src="<?= base_url() ?>/assets/img/<?= $bengkel['gambar'] ?>" onclick="changeImg(this)" alt="image" class="thumbnail">
                                 </div>
                                 <div class="col-3">
-                                    <img src="<?= base_url() ?>/assets/img/test2.jpg" onclick="changeImg(this)" alt="image" class="thumbnail">
+                                    <?php if ($bengkel['gambar2'] !== null) : ?>
+                                        <img src="<?= base_url() ?>/assets/img/<?= $bengkel['gambar2'] ?>" onclick="changeImg(this)" alt="image" class="thumbnail">
+                                    <?php endif; ?>
                                 </div>
                                 <div class=" col-3">
-                                    <img src="<?= base_url() ?>/assets/img/test3.jpg" onclick="changeImg(this)" alt="image" class="thumbnail">
+                                    <?php if ($bengkel['gambar3'] !== null) : ?>
+                                        <img src="<?= base_url() ?>/assets/img/<?= $bengkel['gambar3'] ?>" onclick="changeImg(this)" alt="image" class="thumbnail">
+                                    <?php endif; ?>
                                 </div>
                                 <div class=" col-3">
-                                    <img src="<?= base_url() ?>/assets/img/test4.jpg" onclick="changeImg(this)" alt="image" class="thumbnail">
+                                    <?php if ($bengkel['gambar4'] !== null) : ?>
+                                        <img src="<?= base_url() ?>/assets/img/<?= $bengkel['gambar4'] ?>" onclick="changeImg(this)" alt="image" class="thumbnail">
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -52,9 +58,10 @@
                         <h5>Buka</h5>
                         <p><?= $bengkel['buka']; ?></p>
                         <h5>Lokasi</h5>
-                        <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 100%; width: 80%;">
+                        <p><?= $bengkel['alamat']; ?></p>
+                        <!-- <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 100%; width: 80%;">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.3369368829694!2d112.63327291487111!3d-7.964088694263863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd62833a8a51eb1%3A0x6236badc9448d6fc!2sSumber%20Urip%20Autoservice!5e0!3m2!1sen!2sus!4v1602916157587!5m2!1sen!2sus" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -163,7 +170,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Pesan Service Sekarang</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -194,7 +201,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="antrianLabel">Modal title</h5>
+                <h5 class="modal-title" id="antrianLabel">Cek Antrian</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
