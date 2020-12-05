@@ -218,6 +218,7 @@ class Users extends BaseController
             'title' => 'Detail',
             'bengkel' => $this->bengkelModel->getBengkel($slug),
             'review' => $this->reviewBengkel->get_Review($slug),
+            'rev' => $this->reviewBengkel->get_Review($slug),
             'pesan' => $this->userPesan->getAntrian($slug),
             'cek' => $this->userPesan->cekAntrian($slug),
             'rating' => $rating,
@@ -295,7 +296,7 @@ class Users extends BaseController
         helper(['form']);
         $complated = 'completed';
         if ($complated) {
-            $a = 0;
+            $a = 'selesai';
         }
         $newData = [
             'id_pesan' => $id,

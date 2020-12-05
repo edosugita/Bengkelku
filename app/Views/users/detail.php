@@ -145,7 +145,7 @@
                             <?php else : ?>
                                 <ul class="nav">
                                     <?php if (session()->get('id') == $p['id']) : ?>
-                                        <?php if ($p['status'] == 'completed') : ?>
+                                        <?php if ($p['status'] == 'completed' && $p['antrian'] == 'selesai') : ?>
                                             <li class="check-queue"><a href="<?= base_url() ?>/home/review/<?= $bengkel['slug']; ?>">Review</a></li>
                                         <?php elseif ($p['status'] == 'in progress') : ?>
                                             <li class="check-queue"><a href="<?= base_url() ?>/home/review/<?= $bengkel['slug']; ?>">Review</a></li>
