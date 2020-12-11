@@ -22,6 +22,8 @@ class Admin extends BaseController
     {
         $data = [
             'title' => 'Dashboard',
+            'jumlah' => $this->bengkelModel->getCount(),
+            'juser' => $this->usersModel->getCountUs(),
 
         ];
         return view('admin/dashboard', $data);

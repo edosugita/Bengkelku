@@ -260,7 +260,7 @@ class Users extends BaseController
 
         $antrian = $this->request->getVar('antrian');
 
-        if ($antrian == null) {
+        if ($antrian == 'selesai' || $antrian == null) {
             $isi = 1;
         } else {
             $isi = $antrian + 1;
@@ -315,6 +315,9 @@ class Users extends BaseController
     {
         helper(['form']);
         $cancel = 'canceled';
+        if ($cancel) {
+            $a = 'batal';
+        }
         $newData = [
             'id_pesan' => $id,
             'status' => $cancel,

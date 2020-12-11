@@ -23,4 +23,11 @@ class BengkelModel extends Model
     {
         return $this->table('bengkel')->like('nama', $keyword);
     }
+
+    public function getCount()
+    {
+        return $this->db->table('bengkel')
+            ->selectCount('nama')
+            ->get()->getResultArray();
+    }
 }

@@ -209,7 +209,7 @@
             <div class="modal-body">
                 <div class="col-md-12">
                     <?php foreach ($cek as $c) : ?>
-                        <?php if (empty($c['antrian'])) : ?>
+                        <?php if (($c['antrian']) < 1) : ?>
                             <p style="text-align: center; font-size: 17px">Tidak Terdapat Antrian</p>
                         <?php else : ?>
                             <p style="text-align: center; font-size: 17px">Terdapat <?= $c['antrian']; ?> antrian saat ini</p>

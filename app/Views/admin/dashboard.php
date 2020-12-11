@@ -17,7 +17,9 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>150</h3>
+                        <?php foreach ($jumlah as $j) : ?>
+                            <h3><?= $j['nama']; ?></h3>
+                        <?php endforeach; ?>
 
                         <p>Bengkel Registrations</p>
                     </div>
@@ -47,7 +49,9 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>44</h3>
+                        <?php foreach ($juser as $u) : ?>
+                            <h3><?= $u['id']; ?></h3>
+                        <?php endforeach; ?>
 
                         <p>User Registrations</p>
                     </div>

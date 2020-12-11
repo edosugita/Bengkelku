@@ -19,4 +19,11 @@ class UserUpload extends Model
     {
         return $this->where(['id' => $id])->first();
     }
+
+    public function getCountUs()
+    {
+        return $this->db->table('users')
+            ->selectCount('id')
+            ->get()->getResultArray();
+    }
 }
