@@ -48,6 +48,7 @@
                         <div class="form-group">
                             <i class="fas fa-map-marker-alt icon"></i>
                             <input class="form-control" type="text" name="alamat" placeholder="Alamat">
+                            <input class="form-control" type="hidden" name="is_active" value="0">
                         </div>
                     </div>
                     <div class="col-md-12">

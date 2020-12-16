@@ -55,8 +55,8 @@
                     </tr>
                     <tr>
                         <td>Waktu Operasional</td>
-                        <?php if (!empty(session()->get('deskripsi'))) : ?>
-                            <td><?= session()->get('deskripsi') ?></td>
+                        <?php if (!empty(session()->get('buka'))) : ?>
+                            <td><?= session()->get('buka') ?></td>
                         <?php else : ?>
                             <td>-</td>
                         <?php endif; ?>

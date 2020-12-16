@@ -21,7 +21,11 @@
                             <tr>
                                 <th scope="row"><?= $i++; ?></th>
                                 <td><?= $c['id_pesan']; ?></td>
-                                <td><?= $c['rating']; ?></td>
+                                <td>
+                                    <?php for ($a = 0; $a < $c['rating']; $a++) : ?>
+                                        <span class="fa fa-star star-review" style="color: #ff9d00;"></span>
+                                    <?php endfor; ?>
+                                </td>
                                 <td><?= $c['komentar']; ?></td>
                             </tr>
                         <?php endif; ?>

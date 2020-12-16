@@ -23,6 +23,11 @@
                         <?= session()->get('success'); ?>
                     </div>
                 <?php endif; ?>
+                <?php if (session()->get('danger')) : ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?= session()->get('danger'); ?>
+                    </div>
+                <?php endif; ?>
                 <?php if (isset($validation)) : ?>
                     <div class="col-12">
                         <div class="alert alert-danger" role="alert">
@@ -53,7 +58,7 @@
                         <button type="submit" name="login" class="btn">SIGN IN</button>
                     </div>
                     <div class="col-md-12 forget">
-                        <a href="#">Forgot your password?</a>
+                        <a href="/bengkel/login/forget">Forgot your password?</a>
                     </div>
                     <div class="col-md-11 mx-auto">
                         <hr class="mx-auto line">

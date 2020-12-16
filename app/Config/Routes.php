@@ -49,6 +49,10 @@ $routes->match(['get', 'post'], '/update', 'Users::update');
 $routes->match(['get', 'post'], '/ulasan', 'Users::ulasan');
 $routes->match(['get', 'post'], '/login', 'Users::login');
 $routes->match(['get', 'post'], '/register', 'Users::register');
+$routes->match(['get', 'post'], '/active', 'Users::active');
+$routes->match(['get', 'post'], '/forget/change', 'Users::change');
+$routes->match(['get', 'post'], '/login/forget', 'Users::forget');
+$routes->match(['get', 'post'], '/login/forget/success', 'Users::sforget');
 
 // ------------------------------------Admin------------------------------------
 
@@ -75,6 +79,10 @@ $routes->match(['get', 'post'], '/bengkel/login', 'Pages::login');
 $routes->match(['get', 'post'], '/bengkel/register', 'Pages::register');
 $routes->match(['get', 'post'], '/bengkel/update', 'Pages::update');
 $routes->match(['get', 'post'], '/bengkel/save', 'Pages::save');
+$routes->match(['get', 'post'], '/bengkel/active', 'Pages::active');
+$routes->match(['get', 'post'], '/bengkel/forget/change', 'Pages::bengkelchange');
+$routes->match(['get', 'post'], '/bengkel/login/forget', 'Pages::bengkelforget');
+$routes->match(['get', 'post'], '/bengkel/login/forget/success', 'Pages::sforget');
 
 /**
  * --------------------------------------------------------------------

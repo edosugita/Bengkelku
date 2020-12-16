@@ -7,6 +7,7 @@ use App\Models\UserModel;
 use App\Models\UserReview;
 use App\Models\UserUpload;
 use App\Models\UserPesan;
+use App\Models\UserVerifi;
 use Config\App;
 
 class Users extends BaseController
@@ -15,6 +16,8 @@ class Users extends BaseController
     protected $bengkelModel;
     protected $reviewBengkel;
     protected $userPesan;
+    protected $email;
+    protected $active;
 
     public function __construct()
     {
@@ -22,6 +25,8 @@ class Users extends BaseController
         $this->bengkelModel = new BengkelModel();
         $this->reviewBengkel = new UserReview();
         $this->userPesan = new UserPesan();
+        $this->email = \Config\Services::email();
+        $this->active = new UserVerifi();
     }
 
     public function index()
@@ -71,11 +76,28 @@ class Users extends BaseController
                 $user = $model->where('email', $this->request->getVar('email'))->first();
                 $this->setUserSession($user);
 
-                return redirect()->to('/');
+                return redirect()->to('/users/isActive');
             }
         }
 
         return view('users/login', $data);
+    }
+
+    public function isActive()
+    {
+        if (session()->get('is_active') == 1) {
+            return redirect()->to('/');
+        } else {
+            session()->destroy();
+            return redirect()->to('/users/notActive');
+        }
+    }
+
+    public function notActive()
+    {
+        $session = session();
+        $session->setFlashdata('danger', 'Your account has not been verified');
+        return redirect()->to('/login');
     }
 
     private function setUserSession($user)
@@ -87,6 +109,7 @@ class Users extends BaseController
             'number' => $user['number'],
             'alamat' => $user['alamat'],
             'email' => $user['email'],
+            'is_active' => $user['is_active'],
             'picture' => $user['picture'],
             'isLoggedIn' => true,
         ];
@@ -119,23 +142,166 @@ class Users extends BaseController
             } else {
                 $model = new UserModel();
 
+                $vkey = md5(time() . $this->request->getVar('namadepan'));
+
                 $newData = [
                     'nama_depan' => $this->request->getVar('namadepan'),
                     'nama_belakang' => $this->request->getVar('namabelakang'),
                     'number' => $this->request->getVar('number'),
                     'alamat' => $this->request->getVar('alamat'),
+                    'is_active' => $this->request->getVar('is_active'),
+                    'vkey' => $vkey,
                     'email' => $this->request->getVar('email'),
                     'password' => $this->request->getVar('password'),
                 ];
 
+                $nam = $this->request->getVar('namadepan');
+                $em = $this->request->getVar('email');
+                $this->email->setFrom('infobengkel@info.in', 'noreply');
+                $this->email->setTo($em);
+                $this->email->setSubject('bengkelku.id');
+                $this->email->setMessage('
+                <h3>Hai ' . $nam . ' thank you for joining us</h3>
+                <p>Please click active for activate your account : <a href="http://localhost:8080/active?vkey=' . $vkey . '">Active</a></p>
+                <hr>
+                <p color="#474747">This is an automated email. Please do not reply to this email.</p>
+                ');
+
+                //dd($newData);
                 $model->save($newData);
-                $session = session();
-                $session->setFlashdata('success', 'Successful Registration');
+                if (!$this->email->send()) {
+                    $session = session();
+                    $session->setFlashdata('danger', 'Gagal Mengirim');
+                } else {
+                    $session = session();
+                    $session->setFlashdata('success', 'Registration Success, Please Activate Your Email');
+                }
                 return redirect()->to('/login');
             }
         }
 
         return view('users/register', $data);
+    }
+
+    public function active()
+    {
+        if (isset($_GET['vkey'])) {
+            $vkey = $_GET['vkey'];
+            $result = $this->active->getActive($vkey);
+
+            if ($result->countAll() > 1) {
+                $update = $this->active->setActive($vkey);
+
+                if ($update) {
+                    $session = session();
+                    $session->setFlashdata('success', 'Your account has been verified. You may now login');
+                    return redirect()->to('/login');
+                } else {
+                    $session = session();
+                    $session->setFlashdata('danger', 'Sorry something whent wrong');
+                    return redirect()->to('/login');
+                }
+            } else {
+                $session = session();
+                $session->setFlashdata('danger', 'This account invalid or already verified');
+                return redirect()->to('/login');
+            }
+        }
+    }
+
+    public function forget()
+    {
+        $data = [
+            'title' => 'Forget Password',
+        ];
+
+        helper(['form']);
+
+        if ($this->request->getMethod() == 'post') {
+            $rules = [
+                'email' => 'required|min_length[6]|max_length[50]',
+            ];
+
+            if (!$this->validate($rules)) {
+                $data['validation'] = $this->validator;
+            } else {
+
+                $vkey = md5(time() . $this->request->getVar('email'));
+
+                $em = $this->request->getVar('email');
+                $this->email->setFrom('infobengkel@info.in', 'noreply');
+                $this->email->setTo($em);
+                $this->email->setSubject('bengkelku.id : Forget Password');
+                $this->email->setMessage('
+                <h3>Have you forgotten your password</h3>
+                <p>Please click forget for change new password : <a href="http://localhost:8080/forget/change?vkey=' . $vkey . '">Forget</a></p>
+                <hr>
+                <p color="#474747">This is an automated email. Please do not reply to this email.</p>
+                ');
+
+                $this->active->setForget($vkey, $em);
+                if (!$this->email->send()) {
+                    $session = session();
+                    $session->setFlashdata('danger', 'Gagal Mengirim');
+                } else {
+                    $session = session();
+                    $session->setFlashdata('success', 'Registration Success, Please Activate Your Email');
+                }
+                return redirect()->to('/login/forget/success');
+            }
+        }
+
+        return view('users/forget', $data);
+    }
+
+    public function change()
+    {
+        if (isset($_GET['vkey'])) {
+            $vkey = $_GET['vkey'];
+            $data = [
+                'title' => 'Change Password',
+                'vkey' => $vkey
+            ];
+
+            $rules = [
+                'password' => 'required|min_length[8]|max_length[255]',
+                'password2' => 'matches[password]'
+            ];
+
+            if (!$this->validate($rules)) {
+                $data['validation'] = $this->validator;
+            } else {
+                $pass = $this->request->getVar('password');
+
+                $passhash = password_hash($pass, PASSWORD_DEFAULT);
+                $result = $this->active->getForget($vkey);
+
+                if ($result->countAll() > 1) {
+                    $update = $this->active->updateForget($passhash, $vkey);
+
+                    if ($update) {
+                        $session = session();
+                        $session->setFlashdata('success', 'Password has been successfully changed');
+                        return redirect()->to('/login');
+                    } else {
+                        $session = session();
+                        $session->setFlashdata('danger', 'Sorry something whent wrong');
+                        return redirect()->to('/login');
+                    }
+                }
+            }
+
+            return view('users/change', $data);
+        }
+    }
+
+    public function sforget()
+    {
+        $data = [
+            'title' => 'Forget Password',
+        ];
+
+        return view('users/sforget', $data);
     }
 
     public function profile()

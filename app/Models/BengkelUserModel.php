@@ -9,7 +9,7 @@ class BengkelUserModel extends Model
     protected $table            = 'bengkel';
     protected $primaryKey       = 'id_bengkel';
     protected $useTimestamps    = true;
-    protected $allowedFields    = ['nama', 'no_telp', 'slug', 'buka', 'deskripsi', 'alamat', 'kota', 'gambar', 'gambar2', 'gambar3', 'gambar4', 'email', 'password'];
+    protected $allowedFields    = ['nama', 'no_telp', 'slug', 'buka', 'deskripsi', 'alamat', 'kota', 'gambar', 'gambar2', 'gambar3', 'gambar4', 'email', 'password', 'is_active', 'vkey'];
     protected $beforeInsert     = ['beforeInsert'];
     protected $beforeUpdate     = ['beforeUpdate'];
 

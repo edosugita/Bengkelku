@@ -42,6 +42,7 @@
                         <div class="form-group">
                             <i class="fas fa-city icon"></i>
                             <input class="form-control" type="text" name="kota" placeholder="Kota">
+                            <input class="form-control" type="hidden" name="is_active" value="0">
                         </div>
                     </div>
                     <div class="col-md-12">

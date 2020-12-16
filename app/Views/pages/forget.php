@@ -1,4 +1,4 @@
-<?= $this->extend('layout/loginregister'); ?>
+<?= $this->extend('layout/bengkel/loginregister'); ?>
 
 <?= $this->section('content'); ?>
 <div class="content">
@@ -13,11 +13,11 @@
     </div>
     <div class="row">
         <div class="col-md-7">
-            <img src="<?= base_url() ?>/assets/img/bg.jpg" class="img-fluid" alt="gambar">
+            <img src="<?= base_url() ?>/assets/img/bg-bengkel.jpg" class="img-fluid" alt="gambar">
         </div>
         <div class="col-md-4 modal-content">
             <h3>welcome</h3>
-            <form action="/login" method="post">
+            <form action="/bengkel/login/forget" method="post">
                 <?php if (session()->get('success')) : ?>
                     <div class="alert alert-success" role="alert">
                         <?= session()->get('success'); ?>
@@ -43,29 +43,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <i class="fas fa-lock icon"></i>
-                            <input class="form-control" type="password" name="password" placeholder="Password" minlength="8">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="remember">
-                            <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <button type="submit" name="login" class="btn">SIGN IN</button>
-                    </div>
-                    <div class="col-md-12 forget">
-                        <a href="/login/forget">Forgot your password?</a>
-                    </div>
-                    <div class="col-md-11 mx-auto">
-                        <hr class="mx-auto line">
-                        <p class="or">OR</p>
-                    </div>
-                    <div class="col-md-12">
-                        <button type="button" onclick="location.href='/register'" class="btn">SIGN UP</button>
+                        <button type="submit" name="forget" class="btn">Forget</button>
                     </div>
                 </div>
             </form>

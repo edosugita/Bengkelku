@@ -33,8 +33,8 @@ class UserRules
     }
     public function validateBengkel(string $str, string $field, array $data)
     {
-        $m = new BengkelUserModel();
-        $bengkel = $m->where('email', $data['email'])->first();
+        $ma = new BengkelUserModel();
+        $bengkel = $ma->where('email', $data['email'])->first();
 
         if (!$bengkel) {
             return false;
